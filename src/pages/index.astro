@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  lede,
+  links,
+  profile,
+  publications
+} from "../data/site";
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="page hero-grid">
+      <div class="portrait-frame">
+        <img
+          class="portrait"
+          src="/profile-main.webp"
+          alt={profile.name}
+          width="900"
+          height="1200"
+        />
+      </div>
+      <div class="hero-copy">
+        <h1>{profile.name}</h1>
+        <p class="lede">{lede}</p>
+        <p class="affil">
+          I am an M.S. student in Intelligent Technology Systems at the{" "}
+          <a href={profile.schoolUrl}>Miin Wu School of Computing</a>,{" "}
+          <a href={profile.universityUrl}>National Cheng Kung University</a>. I am advised by{" "}
+          <a href={profile.advisorUrl}>Prof. Shao-Man Lee</a> in the{" "}
+          <a href={profile.labUrl}>SocioLegal Lab</a>.
+        </p>
+        <ul class="cta">
+          <li><a href={profile.cvPath}>Download CV</a></li>
+          {links
+            .filter((link) => link.label !== "CV")
+            .map((link) => (
+              <li><a href={link.href}>{link.label}</a></li>
+            ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="publications">
+    <div class="page publication-layout">
+      <h2>Publications</h2>
+      <div class="pubs">
+        {publications.map((pub) => (
+          <article class="pub">
+            <div class="pub-year">{pub.year}</div>
+            <div>
+              <div class="pub-title">{pub.title}</div>
+              <p class="pub-meta">{pub.authors}</p>
+              <p class="pub-meta">
+                {pub.venue}{pub.note ? ` · ${pub.note}` : ""}
+              </p>
+              {pub.links.length > 0 && (
+                <p class="pub-links">
+                  {pub.links.map((link) => (
+                    <a href={link.href}>{link.label} ↗</a>
+                  ))}
+                </p>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

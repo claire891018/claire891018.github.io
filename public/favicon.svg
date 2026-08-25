@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="C">
+  <style>
+    text { fill: #1c4b73 }
+    @media (prefers-color-scheme: dark) { text { fill: #7fb0d8 } }
+  </style>
+  <text x="32" y="49" text-anchor="middle" font-family="Georgia, serif" font-size="56" font-weight="700">C</text>
+</svg>

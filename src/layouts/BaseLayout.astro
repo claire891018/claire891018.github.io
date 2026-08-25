@@ -1,0 +1,90 @@
+---
+import "../styles/global.css";
+import { profile } from "../data/site";
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const {
+  title,
+  description = "Mu-Ko (Claire) Chou is an M.S. student at National Cheng Kung University working on legal NLP, mechanistic interpretability, and retrieval evaluation."
+} = Astro.props;
+
+const pageTitle = title ? `${title} — ${profile.name}` : profile.name;
+const currentYear = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+    />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="page">
+        <a class="topbar-name" href="/">{profile.name}</a>
+        <nav class="topbar-nav">
+          <a href="/" data-nav-page="home">Home</a>
+          <a href="/#publications" data-nav-section="publications">Publications</a>
+          <a href="/cv/" data-nav-page="cv">CV</a>
+        </nav>
+      </div>
+    </div>
+
+    <slot />
+
+    <footer>
+      <div class="page">
+        &copy; {currentYear} {profile.name}
+      </div>
+    </footer>
+    <script>
+      const navLinks = [...document.querySelectorAll<HTMLAnchorElement>(".topbar-nav a")];
+      const sectionLinks = navLinks.filter((link) => link.dataset.navSection);
+      const sections = sectionLinks
+        .map((link) => document.getElementById(link.dataset.navSection ?? ""))
+        .filter((section): section is HTMLElement => section !== null);
+
+      const setActiveLink = (activeLink?: HTMLAnchorElement) => {
+        navLinks.forEach((link) => {
+          const isActive = link === activeLink;
+          link.classList.toggle("is-active", isActive);
+          if (isActive) link.setAttribute("aria-current", "location");
+          else link.removeAttribute("aria-current");
+        });
+      };
+
+      const updateNavigation = () => {
+        if (window.location.pathname.startsWith("/cv")) {
+          setActiveLink(navLinks.find((link) => link.dataset.navPage === "cv"));
+          return;
+        }
+
+        const marker = window.scrollY + window.innerHeight * 0.32;
+        const activeSection = sections.find(
+          (section) => marker >= section.offsetTop && marker < section.offsetTop + section.offsetHeight
+        )?.id;
+        const activeLink = sectionLinks.find((link) => link.dataset.navSection === activeSection);
+        const homeLink = navLinks.find((link) => link.dataset.navPage === "home");
+        setActiveLink(activeLink ?? (marker < (sections[0]?.offsetTop ?? Infinity) ? homeLink : sectionLinks.at(-1)));
+      };
+
+      updateNavigation();
+      window.addEventListener("scroll", updateNavigation, { passive: true });
+      window.addEventListener("resize", updateNavigation);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { coursework, education, honors, profile, skills } from "../data/site";
+---
+
+<BaseLayout title="CV" description="Curriculum vitae of Mu-Ko Chou.">
+  <section class="hero">
+    <div class="page">
+      <a class="back" href="/">← Back</a>
+      <h1 style="margin-top:1.5rem">Curriculum vitae</h1>
+      <ul class="cta">
+        <li><a href={profile.cvPath}>Download PDF</a></li>
+        <li><a href={`mailto:${profile.email}`}>Email</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="page cv-layout">
+      <div class="cv-summary">
+        <section class="cv-section">
+          <h2>Education</h2>
+          <div class="stack">
+            {education.map((item) => (
+              <div class="item">
+                <h3>{item.school}</h3>
+                <p class="meta">{item.period}</p>
+                <p>{item.degree}{item.detail ? ` · ${item.detail}` : ""}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section class="cv-section">
+          <h2>Honors</h2>
+          <div class="stack">
+            {honors.map((item) => (
+              <div class="item">
+                <h3>{item.title}</h3>
+                <p class="meta">{item.year}</p>
+                {item.detail && <p>{item.detail}</p>}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section class="cv-section">
+          <h2>Skills</h2>
+          <dl class="skills">
+            {skills.map((group) => (
+              <div class="skill-row">
+                <dt>{group.label}</dt>
+                <dd>{group.items.join(", ")}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        <section class="cv-section">
+          <h2>Selected coursework</h2>
+          <ul class="courses">
+            {coursework.map((course) => <li>{course}</li>)}
+          </ul>
+        </section>
+      </div>
+
+      <aside class="pdf-panel" aria-label="Embedded curriculum vitae">
+        <h2>Full CV</h2>
+        <iframe class="pdf-frame" src={profile.cvPath} title="Mu-Ko Chou CV"></iframe>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
