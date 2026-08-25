@@ -123,7 +123,7 @@ p {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 10rem minmax(0, 1fr);
+  grid-template-columns: 12rem minmax(0, 1fr);
   gap: clamp(2.5rem, 5vw, 4rem);
   align-items: start;
   max-width: 58rem;
@@ -165,7 +165,7 @@ h1 {
 }
 
 .portrait-frame {
-  width: 10rem;
+  width: 12rem;
   aspect-ratio: 1;
   overflow: hidden;
   border: 1px solid var(--rule);
@@ -178,7 +178,7 @@ h1 {
   max-width: none;
   object-fit: cover;
   transform: scale(2.05);
-  transform-origin: 58% 58%;
+  transform-origin: 55% 31%;
 }
 
 .cta {
@@ -490,7 +490,7 @@ footer a {
   }
 
   .portrait-frame {
-    width: 8.5rem;
+    width: 9.5rem;
   }
 
   .chapter,
