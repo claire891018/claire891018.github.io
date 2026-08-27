@@ -209,6 +209,12 @@ h1 {
   color: var(--on-accent);
 }
 
+/* Reserve the width of "Copied!" so the row does not shift when the label swaps. */
+.cta a[href^="mailto:"] {
+  min-width: calc(7ch + 2.1rem);
+  text-align: center;
+}
+
 /* ---------- sections ---------- */
 
 section.block {

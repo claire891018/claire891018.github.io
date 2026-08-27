@@ -85,6 +85,46 @@ const currentYear = new Date().getFullYear();
       updateNavigation();
       window.addEventListener("scroll", updateNavigation, { passive: true });
       window.addEventListener("resize", updateNavigation);
+
+      // Email buttons copy the address on click. The mailto: link still fires for
+      // anyone with a mail client registered; on machines without one — common on
+      // Windows 11, which no longer ships a Mail app — nothing happens at all, so
+      // the copy is the whole interaction.
+      const copyText = async (value: string) => {
+        try {
+          await navigator.clipboard.writeText(value);
+          return true;
+        } catch {
+          const field = document.createElement("textarea");
+          field.value = value;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          const copied = document.execCommand("copy");
+          field.remove();
+          return copied;
+        }
+      };
+
+      document.querySelectorAll<HTMLAnchorElement>('a[href^="mailto:"]').forEach((link) => {
+        const address = (link.getAttribute("href") ?? "").replace(/^mailto:/, "");
+        if (!address) return;
+
+        const label = link.textContent ?? "";
+        let reset: number | undefined;
+        link.title = address;
+
+        link.addEventListener("click", async () => {
+          if (!(await copyText(address))) return;
+          link.textContent = "Copied!";
+          window.clearTimeout(reset);
+          reset = window.setTimeout(() => {
+            link.textContent = label;
+          }, 2000);
+        });
+      });
     </script>
   </body>
 </html>
