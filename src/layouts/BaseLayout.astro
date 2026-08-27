@@ -48,7 +48,8 @@ const currentYear = new Date().getFullYear();
 
     <footer>
       <div class="page">
-        &copy; {currentYear} {profile.name}
+        &copy; {currentYear} {profile.name} &middot;{" "}
+        <a href={`mailto:${profile.email}`}>{profile.email}</a>
       </div>
     </footer>
     <script>
