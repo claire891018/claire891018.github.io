@@ -386,7 +386,7 @@ h2 {
   animation: none;
   color: var(--accent);
   opacity: 1;
-  text-shadow: 0 2px 8px rgb(20 24 31 / 16%);
+  text-shadow: 0 2px 10px rgb(20 24 31 / 28%);
 }
 
 @keyframes cv-link-breathe {
