@@ -359,37 +359,31 @@ h2 {
 }
 
 .cv-continuation a {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.8rem;
-  width: 100%;
-  min-height: 6.5rem;
-  padding: 1.5rem 1.25rem;
+  padding: 0.9rem 1.25rem;
   color: var(--muted);
+  font-family: var(--mono);
   font-size: 0.95rem;
   text-decoration: none;
-  opacity: var(--pull-opacity, 0.48);
-  transform: translateY(var(--pull-offset, 0.5rem));
-  transition: color 180ms ease, opacity 120ms linear, transform 120ms linear;
+  transition: color 180ms ease, opacity 280ms ease, transform 280ms ease;
 }
 
-.cv-continuation-arrow {
-  transition: transform 180ms ease;
+.cv-continuation.is-pending a {
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(0.65rem);
+}
+
+.cv-continuation.is-visible a {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .cv-continuation a:hover,
 .cv-continuation a:focus-visible {
   color: var(--accent);
-}
-
-.cv-continuation.is-leaving a {
-  color: var(--accent);
-}
-
-.cv-continuation a:hover .cv-continuation-arrow,
-.cv-continuation a:focus-visible .cv-continuation-arrow {
-  transform: translateX(0.3rem);
 }
 
 /* generic stack (experience, cv) */
@@ -513,11 +507,15 @@ footer a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cv-continuation a,
-  .cv-continuation-arrow {
+  .cv-continuation a {
     transition: none;
   }
 
+  .cv-continuation.is-pending a {
+    pointer-events: auto;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (max-width: 44rem) {
