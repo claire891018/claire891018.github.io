@@ -348,6 +348,50 @@ h2 {
   margin-right: 1.1rem;
 }
 
+/* Subtle continuation revealed after the homepage content. */
+
+.cv-continuation {
+  display: grid;
+  min-height: 6.5rem;
+  place-items: center;
+  border-top: 1px solid var(--rule);
+  background: var(--band);
+}
+
+.cv-continuation a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  width: 100%;
+  min-height: 6.5rem;
+  padding: 1.5rem 1.25rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-decoration: none;
+  opacity: var(--pull-opacity, 0.48);
+  transform: translateY(var(--pull-offset, 0.5rem));
+  transition: color 180ms ease, opacity 120ms linear, transform 120ms linear;
+}
+
+.cv-continuation-arrow {
+  transition: transform 180ms ease;
+}
+
+.cv-continuation a:hover,
+.cv-continuation a:focus-visible {
+  color: var(--accent);
+}
+
+.cv-continuation.is-leaving a {
+  color: var(--accent);
+}
+
+.cv-continuation a:hover .cv-continuation-arrow,
+.cv-continuation a:focus-visible .cv-continuation-arrow {
+  transform: translateX(0.3rem);
+}
+
 /* generic stack (experience, cv) */
 
 .stack {
@@ -466,6 +510,14 @@ footer {
 
 footer a {
   color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cv-continuation a,
+  .cv-continuation-arrow {
+    transition: none;
+  }
+
 }
 
 @media (max-width: 44rem) {

@@ -68,4 +68,82 @@ import {
       </div>
     </div>
   </section>
+
+  <div class="cv-continuation" data-scroll-reveal>
+    <a href="/cv/">
+      <span>Continue to Curriculum vitae</span>
+      <span class="cv-continuation-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+
+  <script>
+    const continuation = document.querySelector<HTMLElement>("[data-scroll-reveal]");
+
+    if (continuation) {
+      const link = continuation.querySelector<HTMLAnchorElement>("a");
+      const destination = link?.href ?? "/cv/";
+      const threshold = 220;
+      let pullDistance = 0;
+      let lastInput = 0;
+      let lastTouchY: number | undefined;
+      let navigating = false;
+
+      const isAtPageEnd = () =>
+        window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+
+      const renderProgress = () => {
+        const progress = Math.min(pullDistance / threshold, 1);
+        continuation.style.setProperty("--pull-opacity", String(0.48 + progress * 0.52));
+        continuation.style.setProperty("--pull-offset", `${(1 - progress) * 0.5}rem`);
+      };
+
+      const resetProgress = () => {
+        pullDistance = 0;
+        renderProgress();
+      };
+
+      const continueToCV = (distance: number) => {
+        if (navigating) return;
+        if (!isAtPageEnd() || distance <= 0) {
+          if (distance < 0) resetProgress();
+          return;
+        }
+
+        const now = performance.now();
+        if (now - lastInput > 700) pullDistance = 0;
+        lastInput = now;
+        pullDistance += Math.min(distance, 80);
+        renderProgress();
+
+        if (pullDistance < threshold) return;
+        navigating = true;
+        continuation.classList.add("is-leaving");
+        window.setTimeout(() => window.location.assign(destination), 140);
+      };
+
+      window.addEventListener("wheel", (event) => continueToCV(event.deltaY), { passive: true });
+      window.addEventListener(
+        "touchstart",
+        (event) => {
+          lastTouchY = event.touches[0]?.clientY;
+        },
+        { passive: true }
+      );
+      window.addEventListener(
+        "touchmove",
+        (event) => {
+          const currentY = event.touches[0]?.clientY;
+          if (currentY === undefined || lastTouchY === undefined) return;
+          continueToCV(lastTouchY - currentY);
+          lastTouchY = currentY;
+        },
+        { passive: true }
+      );
+      window.addEventListener("scroll", () => {
+        if (!isAtPageEnd()) resetProgress();
+      }, { passive: true });
+
+      renderProgress();
+    }
+  </script>
 </BaseLayout>
