@@ -352,17 +352,16 @@ h2 {
 
 .cv-continuation {
   display: grid;
-  min-height: 6.5rem;
   place-items: center;
-  border-top: 1px solid var(--rule);
-  background: var(--band);
+  padding: 1.15rem 1.25rem 1.5rem;
+  background: var(--surface);
 }
 
 .cv-continuation a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.9rem 1.25rem;
+  padding: 0.35rem 0;
   color: var(--muted);
   font-family: var(--mono);
   font-size: 0.95rem;
