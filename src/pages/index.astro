@@ -51,7 +51,14 @@ import {
             <div class="pub-year">{pub.year}</div>
             <div>
               <div class="pub-title">{pub.title}</div>
-              <p class="pub-meta">{pub.authors}</p>
+              <p class="pub-meta">
+                {pub.authors.split(profile.publicationName).map((part, index, parts) => (
+                  <>
+                    {part}
+                    {index < parts.length - 1 && <strong>{profile.publicationName}</strong>}
+                  </>
+                ))}
+              </p>
               <p class="pub-meta">
                 {pub.venue}{pub.note ? ` · ${pub.note}` : ""}
               </p>

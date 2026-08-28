@@ -1,5 +1,6 @@
 export const profile = {
   name: "Mu-Ko (Claire) Chou",
+  publicationName: "Mu-Ko Chou",
   email: "nm6144012@gs.ncku.edu.tw",
   location: "Tainan, Taiwan",
   cvPath: "/Mu-Ko-Chou-CV.pdf",
