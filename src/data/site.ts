@@ -18,7 +18,7 @@ export const links = [
 ];
 
 export const lede =
-  "My master's research examines how large language models represent constitutional concepts across languages, using sparse autoencoder features to trace concept-related signals back to the passages that activate them.";
+  "My master's research asks whether the same internal features can track constitutional concepts across languages. Using sparse autoencoders, I identify these features and trace their activations to specific passages in constitutional judgments.";
 
 export const publications = [
   {
