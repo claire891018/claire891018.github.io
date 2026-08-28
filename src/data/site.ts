@@ -18,7 +18,7 @@ export const links = [
 ];
 
 export const lede =
-  "My master's research uses sparse autoencoders to examine whether the same internal features track constitutional concepts across languages. I am applying to Computer Science Ph.D. programs for Fall 2027.";
+  "My master's research uses sparse autoencoders to examine whether the same internal features track constitutional concepts across languages. I am applying to Ph.D. programs for Fall 2027 to continue my research in LLM interpretability.";
 
 export const publications = [
   {
