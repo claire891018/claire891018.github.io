@@ -60,7 +60,8 @@ import {
                 ))}
               </p>
               <p class="pub-meta">
-                {pub.venue}{pub.note ? ` · ${pub.note}` : ""}
+                {pub.venue === "Preprint" ? <em>{pub.venue}</em> : pub.venue}
+                {pub.note ? ` · ${pub.note}` : ""}
               </p>
               {pub.links.length > 0 && (
                 <p class="pub-links">
