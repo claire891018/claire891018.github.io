@@ -26,7 +26,7 @@ export const publications = [
     title:
       "Tracing Constitutional Concepts Across Languages with Sparse Autoencoder Features",
     authors: "Shao-Man Lee, Mu-Ko Chou",
-    venue: "Under review, Natural Legal Language Processing Workshop",
+    venue: "Preprint",
     year: "2026",
     links: []
   },
