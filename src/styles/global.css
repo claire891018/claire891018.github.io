@@ -61,7 +61,7 @@ p {
 
 .topbar .page {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
   flex-wrap: wrap;
@@ -69,10 +69,20 @@ p {
 }
 
 .topbar-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 0.95rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   text-decoration: none;
+}
+
+.topbar-logo {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  object-fit: contain;
 }
 
 .topbar-nav {
@@ -537,8 +547,8 @@ footer a {
 
 @media (max-width: 44rem) {
   .topbar .page {
-    gap: 1rem;
-    flex-wrap: nowrap;
+    gap: 0.6rem 1rem;
+    flex-wrap: wrap;
   }
 
   .topbar-name {

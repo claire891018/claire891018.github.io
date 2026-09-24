@@ -38,7 +38,10 @@ const currentYear = new Date().getFullYear();
   <body>
     <div class="topbar">
       <div class="page">
-        <a class="topbar-name" href="/">{profile.name}</a>
+        <a class="topbar-name" href="/">
+          <img class="topbar-logo" src="/brand-mark.png?v=mk-v3" width="26" height="26" alt="" />
+          <span>{profile.name}</span>
+        </a>
         <nav class="topbar-nav">
           <a href="/" data-nav-page="home">Home</a>
           <a href="/#publications" data-nav-section="publications">Publications</a>
